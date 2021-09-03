@@ -1,0 +1,162 @@
+<template>
+<div>
+    <carousel-3d
+    :animationSpeed="1000"
+    :width="350"
+    :height="700"
+    :controls-visible="true" 
+    >
+        <slide v-for="(slide, i) in dailyMovies" :index="i" :key="i">
+            <v-chip
+                class="rank"
+                color="pink"
+                label
+                text-color="white"
+                >
+                <v-icon left>
+                    mdi-heart
+                </v-icon>
+                {{i + 1}} 위
+            </v-chip>
+        
+            <figure >
+                <img :src="imgURL[i]" >
+                
+                <figcaption>
+                    <v-card-title> {{slide.movieNm}} 
+                        [<v-icon light :color="getRankIcon(slide.rankInten)[0]">
+                            {{getRankIcon(slide.rankInten)[1]}}
+                            
+                        </v-icon>
+                        {{getRankIcon(slide.rankInten)[2]}}
+                        ]
+                        <v-icon  color="yellow" v-if="slide.rankOldAndNew=='NEW'">mdi-new-box</v-icon>
+                        
+                    </v-card-title>
+                    <v-divider />
+                    <v-card-actions>
+                        전일 대비 관객 : 
+                        <v-icon 
+                            light 
+                            :color="getRankIcon(slide.audiInten)[0]">
+                                {{getRankIcon(slide.audiInten)[1]}}
+                        </v-icon>
+                            {{getRankIcon(slide.audiInten)[2]}}
+                        명
+                        <v-spacer />
+                        개봉일   <v-chip small>{{slide.openDt}}</v-chip> 
+                    </v-card-actions>
+                    <v-divider />
+                    <v-card-actions>
+                        일일매출액 : {{numberToKorean(slide.salesAmt).split('만')[0]}} 만원
+                        <v-spacer />
+                        누적매출 : {{numberToKorean(slide.salesAcc).split('만')[0]}} 만원
+                    </v-card-actions>
+                    <v-divider />
+                    <v-card-actions>
+                        <p> 일일 관객수 : {{numberToKorean(slide.audiCnt)}} 명</p> 
+                        <v-spacer />
+                        <p> 누적 관객수 : {{numberToKorean(slide.audiAcc).split('만')[0]}} 만명</p> 
+                    </v-card-actions>
+                   
+                </figcaption>
+            
+            </figure>
+            
+        </slide>
+    </carousel-3d>
+</div>
+</template>
+<script>
+import { Carousel3d, Slide } from 'vue-carousel-3d';
+
+
+export default ({
+    data() {
+        return {
+            isCurrent: 0,
+            leftIndex: 10,
+            rightIndex: 10,
+            imgURL : ['https://www.kobis.or.kr//common/mast/movie/2013/12/c3dbfe7d478c451e9c55ac42cf1fdd20.jpg',
+                        'https://www.kobis.or.kr//common/mast/movie/2013/11/bd174c0088884aafaeebf3272adc0697.jpg',
+                        'https://www.kobis.or.kr//common/mast/movie/2013/12/d00c4cb1890046209fafaedbec124787.jpg',
+                        'https://www.kobis.or.kr//common/mast/movie/2017/12/d87e904cf42243ee8d79c02c74d116c6.jpg',
+                        'https://www.kobis.or.kr//common/mast/movie/2013/12/37ace89fce7a4b1d9d2b72e4ac7bdd76.jpg',
+                        'https://www.kobis.or.kr//common/mast/movie/2013/11/a645ccb83f1a42d3a1ad5bf641e9869e.jpg',
+                        'https://www.kobis.or.kr//common/mast/movie/2013/12/64317cfb507f4858bf240de563625e7b.jpg',
+                        'https://www.kobis.or.kr//common/mast/movie/2013/11/858a03f3662c4ca485a6f4b45f152d81.jpg',
+                        'https://www.kobis.or.kr//common/mast/movie/2013/11/82f28fb57d0144f48428a53f4c879a61.jpg',
+                        'https://www.kobis.or.kr//common/mast/movie/2013/12/c070e5352f284613bac150eb6e8320a0.jpg']
+        }
+    },
+    components: {
+        Carousel3d,
+        Slide
+    },
+    computed:{
+        dailyMovies(){
+            return this.$store.state.dailyMovies;
+        }
+    },
+    methods:{
+        getRankIcon(value){
+            if (value === "0") return ["white","mdi-minus", ""]
+            else if (value.startsWith("-") ) {
+                return ["red","mdi-arrow-down-bold", value.slice(1,)]
+            }
+            else {
+                return ["blue","mdi-arrow-up-bold",value]
+            }
+        },
+     
+        numberToKorean(number){
+            number = parseInt(number)
+            var inputNumber  = number < 0 ? false : number;
+            var unitWords    = ['', '만', '억', '조', '경'];
+            var splitUnit    = 10000;
+            var splitCount   = unitWords.length;
+            var resultArray  = [];
+            var resultString = '';
+
+            for (var i = 0; i < splitCount; i++){
+                var unitResult = (inputNumber % Math.pow(splitUnit, i + 1)) / Math.pow(splitUnit, i);
+                unitResult = Math.floor(unitResult);
+                if (unitResult > 0){
+                    resultArray[i] = unitResult;
+                }
+            }
+
+            for (i = 0; i < resultArray.length; i++){
+                if(!resultArray[i]) continue;
+                resultString = String(resultArray[i]) + " " + unitWords[i] + " " +resultString;
+            }
+
+            return resultString;
+        }
+    }
+ 
+})
+</script>
+<style scoped>
+.carousel-3d-container figure {
+  margin:0;
+}
+
+
+.carousel-3d-container figcaption {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  bottom: 0;
+  padding: 10px;
+  font-size: 12px;
+  min-width: 100%;
+  max-height: 40%;
+  box-sizing: border-box;
+}
+.rank {
+    position: absolute;
+  padding: 10px;
+  font-size: 12px;
+}
+</style>
