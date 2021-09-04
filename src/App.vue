@@ -13,7 +13,7 @@
     <v-dialog
         ref="dialog"
         v-model="modal"
-        :return-value.sync="date"
+        :return-value.sync="inputDate"
         persistent
         width="290px"
       >
@@ -29,10 +29,10 @@
           ></v-text-field>
         </template>
         <v-date-picker
-          v-model="date"
+          v-model="inputDate"
           scrollable
           locale="ko-kr"
-          :max="date"
+          max="2021-09-09"
           min="2014-01-01"
         >
           <v-spacer></v-spacer>
@@ -46,7 +46,7 @@
           <v-btn
             text
             color="primary"
-            @click="$refs.dialog.save(date)"
+            @click="getDailyMovies(inputDate)"
           >
             OK
           </v-btn>
@@ -54,6 +54,7 @@
       </v-dialog>
       </v-app-bar>
     <v-main>
+      <v-overlay :value="loading"></v-overlay>
       <MainView />
     </v-main>
   </v-app>
@@ -70,15 +71,37 @@ export default {
   },
 
   data: () => ({
+    loading: false,
     items: null,
     date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     modal: false,
+    idate: null,
   }),
   async created(){
-    const [success, dailyMovies] = await get_daily_movies("20210901");
+    this.idate = new Date()
+    this.idate.setDate(this.idate.getDate()-1)
+    this.inputDate = (new Date(this.idate - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
+    this.date = this.inputDate.replace(/-/g, "")
+    // this.date.setDate(this.date.getDate() - 1);
+    const [success, dailyMovies] = await get_daily_movies(this.date);
         if (success) this.$store.commit("set_daily_movies", dailyMovies);
-        console.log(dailyMovies)
         this.items = dailyMovies;
+  },
+  computed:{
+    selectedDate(){
+      return this.$store.state.selectedDate;
+    }
+  },
+  methods:{
+    async getDailyMovies(date){
+      this.loading = true
+      date = date.replace(/-/g, "")
+      const [success, dailyMovies] = await get_daily_movies(date);
+        if (success) this.$store.commit("set_daily_movies", dailyMovies);
+        this.items = dailyMovies;
+        this.modal = false;
+        this.loading = false
+    }
   }
 };
 </script>

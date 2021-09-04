@@ -20,7 +20,7 @@
             </v-chip>
         
             <figure >
-                <img :src="imgURL[i]" >
+                <img :src="`https://lesser-movies.s3.ap-northeast-2.amazonaws.com/` + slide.movieCd + '.jpg'" >
                 
                 <figcaption>
                     <v-card-title> {{slide.movieNm}} 
@@ -77,16 +77,7 @@ export default ({
             isCurrent: 0,
             leftIndex: 10,
             rightIndex: 10,
-            imgURL : ['https://www.kobis.or.kr//common/mast/movie/2013/12/c3dbfe7d478c451e9c55ac42cf1fdd20.jpg',
-                        'https://www.kobis.or.kr//common/mast/movie/2013/11/bd174c0088884aafaeebf3272adc0697.jpg',
-                        'https://www.kobis.or.kr//common/mast/movie/2013/12/d00c4cb1890046209fafaedbec124787.jpg',
-                        'https://www.kobis.or.kr//common/mast/movie/2017/12/d87e904cf42243ee8d79c02c74d116c6.jpg',
-                        'https://www.kobis.or.kr//common/mast/movie/2013/12/37ace89fce7a4b1d9d2b72e4ac7bdd76.jpg',
-                        'https://www.kobis.or.kr//common/mast/movie/2013/11/a645ccb83f1a42d3a1ad5bf641e9869e.jpg',
-                        'https://www.kobis.or.kr//common/mast/movie/2013/12/64317cfb507f4858bf240de563625e7b.jpg',
-                        'https://www.kobis.or.kr//common/mast/movie/2013/11/858a03f3662c4ca485a6f4b45f152d81.jpg',
-                        'https://www.kobis.or.kr//common/mast/movie/2013/11/82f28fb57d0144f48428a53f4c879a61.jpg',
-                        'https://www.kobis.or.kr//common/mast/movie/2013/12/c070e5352f284613bac150eb6e8320a0.jpg']
+    
         }
     },
     components: {
@@ -108,7 +99,6 @@ export default ({
                 return ["blue","mdi-arrow-up-bold",value]
             }
         },
-     
         numberToKorean(number){
             number = parseInt(number)
             var inputNumber  = number < 0 ? false : number;
