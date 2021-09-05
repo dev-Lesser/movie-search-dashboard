@@ -9,6 +9,7 @@ export default new Vuex.Store({
         items: null,
         dailyMovies: null,
         selectedDate: null,
+        loading: false,
     },
     mutations: {
         set_daily_movies: (state, list) => {

@@ -54,7 +54,6 @@
       </v-dialog>
       </v-app-bar>
     <v-main>
-      <v-overlay :value="loading"></v-overlay>
       <MainView />
     </v-main>
   </v-app>
@@ -78,14 +77,17 @@ export default {
     idate: null,
   }),
   async created(){
+    this.$store.state.loading = true
     this.idate = new Date()
     this.idate.setDate(this.idate.getDate()-1)
     this.inputDate = (new Date(this.idate - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
     this.date = this.inputDate.replace(/-/g, "")
     // this.date.setDate(this.date.getDate() - 1);
     const [success, dailyMovies] = await get_daily_movies(this.date);
-        if (success) this.$store.commit("set_daily_movies", dailyMovies);
-        this.items = dailyMovies;
+    if (success) this.$store.commit("set_daily_movies", dailyMovies);
+    this.items = dailyMovies;
+
+    this.$store.state.loading = false
   },
   computed:{
     selectedDate(){
@@ -94,13 +96,13 @@ export default {
   },
   methods:{
     async getDailyMovies(date){
-      this.loading = true
+      this.$store.state.loading = true
       date = date.replace(/-/g, "")
       const [success, dailyMovies] = await get_daily_movies(date);
         if (success) this.$store.commit("set_daily_movies", dailyMovies);
         this.items = dailyMovies;
         this.modal = false;
-        this.loading = false
+        this.$store.state.loading = false
     }
   }
 };

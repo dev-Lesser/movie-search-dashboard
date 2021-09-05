@@ -20,7 +20,14 @@
             </v-chip>
         
             <figure >
-                <img :src="`https://lesser-movies.s3.ap-northeast-2.amazonaws.com/` + slide.movieCd + '.jpg'" >
+                <div v-if="loading">
+                    <v-progress-circular
+                        indeterminate
+                        value="불러오는중"
+                        color="primary"
+                        ></v-progress-circular>
+                </div>
+                <img v-else :src="`https://lesser-movies.s3.ap-northeast-2.amazonaws.com/` + slide.movieCd + '.jpg'" >
                 
                 <figcaption>
                     <v-card-title> {{slide.movieNm}} 
@@ -87,6 +94,9 @@ export default ({
     computed:{
         dailyMovies(){
             return this.$store.state.dailyMovies;
+        },
+        loading(){
+            return this.$store.state.loading;
         }
     },
     methods:{
