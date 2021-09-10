@@ -32,21 +32,22 @@
           v-model="inputDate"
           scrollable
           locale="ko-kr"
-          max="2021-09-09"
+          max="2021-09-19"
           min="2014-01-01"
         >
           <v-spacer></v-spacer>
           <v-btn
             text
-            color="primary"
+            color="red"
             @click="modal = false"
           >
             Cancel
           </v-btn>
           <v-btn
             text
+            :loading="loading"
             color="primary"
-            @click="getDailyMovies(inputDate)"
+            @click="getMovies(inputDate)"
           >
             OK
           </v-btn>
@@ -61,7 +62,8 @@
 
 <script>
 import MainView from './components/MainView';
-import { get_daily_movies } from "@/assets/api";
+    
+import { get_daily_movies, get_weekly_movies } from "@/assets/api";
 export default {
   name: 'App',
 
@@ -70,8 +72,8 @@ export default {
   },
 
   data: () => ({
-    loading: false,
     items: null,
+    weeklyItems: null,
     date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     modal: false,
     idate: null,
@@ -82,8 +84,9 @@ export default {
     this.idate.setDate(this.idate.getDate()-1)
     this.inputDate = (new Date(this.idate - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
     this.date = this.inputDate.replace(/-/g, "")
-    // this.date.setDate(this.date.getDate() - 1);
+
     const [success, dailyMovies] = await get_daily_movies(this.date);
+    console.log(dailyMovies)
     if (success) this.$store.commit("set_daily_movies", dailyMovies);
     this.items = dailyMovies;
 
@@ -92,18 +95,35 @@ export default {
   computed:{
     selectedDate(){
       return this.$store.state.selectedDate;
+    },
+    loading(){
+      return this.$store.state.loading;
     }
   },
   methods:{
-    async getDailyMovies(date){
+    async getMovies(date){
       this.$store.state.loading = true
       date = date.replace(/-/g, "")
-      const [success, dailyMovies] = await get_daily_movies(date);
-        if (success) this.$store.commit("set_daily_movies", dailyMovies);
-        this.items = dailyMovies;
+      var [success, dailyMovies] = await get_daily_movies(date);
+      
+      if (dailyMovies == null){
+        console.log(dailyMovies)
         this.modal = false;
         this.$store.state.loading = false
-    }
+        alert('해당 날짜의 데이터가 업데이트 되지 않았습니다.')
+        return
+      }
+      if (success) this.$store.commit("set_daily_movies", dailyMovies);
+      this.items = dailyMovies;
+      
+      var weeklyMovies;
+      [success, weeklyMovies] = await get_weekly_movies(date);
+      if (success) this.$store.commit("set_weekly_movies", weeklyMovies);
+      this.weeklyItems = weeklyMovies;
+      this.modal = false;
+      this.$store.state.loading = false
+    },
+  
   }
 };
 </script>

@@ -1,12 +1,13 @@
 <template>
-<div>
+<div >
     <carousel-3d
-    :animationSpeed="1000"
+    :animationSpeed="500"
     :width="350"
     :height="700"
     :controls-visible="true" 
+    v-if="dailyMovies !== null"
     >
-        <slide v-for="(slide, i) in dailyMovies" :index="i" :key="i">
+        <slide  v-for="(slide, i) in dailyMovies" :index="i" :key="i">
             <v-chip
                 class="rank"
                 color="pink"
@@ -20,14 +21,7 @@
             </v-chip>
         
             <figure >
-                <div v-if="loading">
-                    <v-progress-circular
-                        indeterminate
-                        value="불러오는중"
-                        color="primary"
-                        ></v-progress-circular>
-                </div>
-                <img v-else :src="`https://lesser-movies.s3.ap-northeast-2.amazonaws.com/` + slide.movieCd + '.jpg'" >
+                <img v-bind:src="STORAGE_URL + slide.movieCd + '.jpg'" >
                 
                 <figcaption>
                     <v-card-title> {{slide.movieNm}} 
@@ -65,7 +59,7 @@
                         <v-spacer />
                         <p> 누적 관객수 : {{numberToKorean(slide.audiAcc).split('만')[0]}} 만명</p> 
                     </v-card-actions>
-                   
+                
                 </figcaption>
             
             </figure>
@@ -76,7 +70,7 @@
 </template>
 <script>
 import { Carousel3d, Slide } from 'vue-carousel-3d';
-
+import secret from '@/assets/secret.json'
 
 export default ({
     data() {
@@ -84,7 +78,9 @@ export default ({
             isCurrent: 0,
             leftIndex: 10,
             rightIndex: 10,
-    
+            STORAGE_URL: secret['STORAGE_URL'],
+            
+
         }
     },
     components: {
@@ -138,21 +134,18 @@ export default ({
 })
 </script>
 <style scoped>
-.carousel-3d-container figure {
-  margin:0;
-}
 
 
 .carousel-3d-container figcaption {
-  position: absolute;
+  /* position: absolute; */
   background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
   bottom: 0;
   padding: 10px;
   font-size: 12px;
-  min-width: 100%;
-  max-height: 40%;
-  box-sizing: border-box;
+  /* min-width: 100%;
+  max-height: 40%; */
+  /* box-sizing: border-box; */
 }
 .rank {
     position: absolute;
