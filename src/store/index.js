@@ -8,15 +8,16 @@ export default new Vuex.Store({
         items: null,
         dailyMovies: null,
         weeklyMovies: null,
-        selectedDate: null,
+        selectedDate:  new Date(),
         loading: false,
+        chartData: null,
     },
     mutations: {
         set_daily_movies: (state, list) => {
             state.dailyMovies = list
         },
-        set_weekly_movies: (state, list) => {
-            state.weeklyMovies = list
+        set_selected_date: (state, Date) => {
+            state.selectedDate = Date
         },
     }
 });

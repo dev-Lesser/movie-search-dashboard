@@ -1,5 +1,5 @@
 <template>
-<div >
+<div>
     <carousel-3d
     :animationSpeed="500"
     :width="350"
@@ -130,26 +130,22 @@ export default ({
             return resultString;
         }
     }
- 
 })
 </script>
 <style scoped>
 
-
 .carousel-3d-container figcaption {
-  /* position: absolute; */
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  bottom: 0;
-  padding: 10px;
-  font-size: 12px;
-  /* min-width: 100%;
-  max-height: 40%; */
-  /* box-sizing: border-box; */
+    /* position: absolute; */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 10px;
+    font-size: 11px;
+    font-family: 'Jeju Gothic', sans-serif;
+
 }
 .rank {
     position: absolute;
-  padding: 10px;
-  font-size: 12px;
+    padding: 10px;
+    font-size: 12px;
 }
 </style>

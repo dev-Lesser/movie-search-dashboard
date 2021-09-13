@@ -7,6 +7,7 @@ export const get_daily_movies = async (dt) => {
     const result = await axios.get(url, {})
     if (result.status == 200) {
         const data = result.data
+        if (data == null) return [false, null]
         const values = Object.values(data)
         const movielist = values.reduce((acc, curr) => acc.concat(curr), [])
         return [true, movielist]
