@@ -4195,6 +4195,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
 
+gsap@^3.7.1:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.7.1.tgz#1c5857f4fbcbd3f5ca0b513ef7abf828fbaa20a8"
+  integrity sha512-4qxuaC2yFWRjMRof5tI/7c9/+L4xMsCoqHrZAmuh+IbOokTnZyoeF0VgvcVHq3uo+/VJZCs7PTvjrFasfGl+ww==
+
 gzip-size@^5.0.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-5.1.1.tgz#cb9bee692f87c0612b232840a873904e4c135274"
@@ -4542,6 +4547,13 @@ ignore@^4.0.3, ignore@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
+
+illusory@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/illusory/-/illusory-2.0.3.tgz#97015d60438f6ca594fb1437cdac25b89377fb9f"
+  integrity sha512-UKGUKGy2JjgqVtJkii4QY6VwJTa0bNKA0r3YehWip9DcK/Q0z190Vx7yDDDd4tPWqZ+j9zsZQ0iVSmYKCUgxwg==
+  dependencies:
+    rematrix "^0.7.0"
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -6932,6 +6944,11 @@ relateurl@0.2.x:
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
 
+rematrix@^0.7.0:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/rematrix/-/rematrix-0.7.2.tgz#09b59118a6b46fc054ff64b6992e4865f5569077"
+  integrity sha512-NYLmE17dX15eUPhngLMTKlRYwATxEhcRdn9LKtk/iOXHxDKglCZnD2MrMLKwLlB5FX8u9kF/9yMhlQJpeDcuPw==
+
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"
@@ -8220,6 +8237,13 @@ uuid@^3.3.2, uuid@^3.4.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
+v-shared-element@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/v-shared-element/-/v-shared-element-3.1.0.tgz#636d0dd96bea5c2564ae2955f03ca118c625c36f"
+  integrity sha512-/I9MbRKGE9NAo6YkwfMgC3onC7nLW15GAqEiEzq/smRok0NlXZE7mqqh3N5FzM/J9f6Cn1GkpIWNS5C92mEprw==
+  dependencies:
+    illusory "^2.0.3"
+
 v8-compile-cache@^2.0.3:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
@@ -8299,6 +8323,11 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
 
+vue-kinesis@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/vue-kinesis/-/vue-kinesis-1.3.3.tgz#39c61e3c5b2f0fef7894fec4eec8b6266e99858c"
+  integrity sha512-tahIm1+OU2EVUx6b23GV4WNZCuK55Zroiw6Ijl32JxMHrImXLlhAXEDjZx26FXGBy1N3TM7bOaO3YQfAPxG2pw==
+
 "vue-loader-v16@npm:vue-loader@^16.1.0":
   version "16.5.0"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-16.5.0.tgz#09c4e0712466899e34b99a686524f19165fb2892"
@@ -8318,6 +8347,11 @@ vue-loader@^15.9.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-onload@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/vue-onload/-/vue-onload-3.1.0.tgz#290c51e018fcb1de6bc6277d919b0e91c4846074"
+  integrity sha512-FwETZi8QfmaJJlydss+qLFUPCIQYgQBuFZQupbn5XPB/PA31h2IA2yvNeHffHQhVBJRWRzJsQv+Qm4v3eaJWLA==
 
 vue-router@^3.5.2:
   version "3.5.2"

@@ -55,7 +55,15 @@
       </v-dialog>
       </v-app-bar>
     <v-main>
-      <router-view></router-view>
+      <transition
+        name="fade-out-in-simultaneous"
+        @before-leave="beforeLeave"
+        @after-leave="afterLeave"
+      >
+        <keep-alive include="main">
+          <router-view></router-view>
+        </keep-alive>
+      </transition>
     </v-main>
   </v-app>
 </template>
@@ -79,7 +87,7 @@ export default {
     this.$store.state.loading = true
     this.idate = new Date()
     this.idate.setDate(this.idate.getDate()-1)
-    this.inputDate = (new Date(this.idate - (new Date()).getTimezoneOffset() * 1000)).toISOString().substr(0, 10);
+    this.inputDate = (new Date(this.idate - (new Date()).getTimezoneOffset() )).toISOString().substr(0, 10);
     this.maxDate = this.inputDate
     this.$store.commit("set_selected_date", this.inputDate)
     this.date = this.inputDate.replace(/-/g, "")
@@ -107,6 +115,17 @@ export default {
     }
   },
   methods:{
+    beforeLeave(el) {
+      const bcr = el.getBoundingClientRect();
+      el.style.position = "fixed";
+      el.style.top = `${bcr.y}px`;
+      el.style.zIndex = -1;
+    },
+    afterLeave(el) {
+      el.style.position = null;
+      el.style.top = null;
+      el.style.zIndex = null;
+    },
     async getMovies(date){
       this.$store.state.loading = true
       this.$store.commit("set_selected_date", date)

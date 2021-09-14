@@ -1,9 +1,10 @@
 <template>
 <div>
+
     <carousel-3d
     :animationSpeed="500"
     :width="350"
-    :height="700"
+    :height="710"
     :controls-visible="true" 
     v-if="dailyMovies !== null"
     >
@@ -21,7 +22,11 @@
             </v-chip>
         
             <figure >
-                <img v-bind:src="STORAGE_URL + slide.movieCd + '.jpg'" >
+                <router-link :to="`/`+ `pixelate` + `/` +slide.movieCd" >
+                    
+                
+                <img :id="`img`+ slide.movieCd" :src="STORAGE_URL + slide.movieCd + '.jpg'" >
+                </router-link>
                 
                 <figcaption>
                     <v-card-title> {{slide.movieNm}} 
@@ -79,7 +84,7 @@ export default ({
             leftIndex: 10,
             rightIndex: 10,
             STORAGE_URL: secret['STORAGE_URL'],
-            
+            show: true,
 
         }
     },
@@ -148,4 +153,5 @@ export default ({
     padding: 10px;
     font-size: 12px;
 }
+
 </style>
