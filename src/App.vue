@@ -6,9 +6,11 @@
       dark
       class="header"
     >
-    <v-card-title>
+    <router-link to="/">
+    <v-card-title >
       영화 박스오피스 순위
     </v-card-title>
+    </router-link>
     <v-spacer />
     <v-dialog
         ref="dialog"

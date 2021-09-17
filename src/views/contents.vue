@@ -12,15 +12,14 @@
         </v-flex>
         <v-flex xs12 sm12 md12 class="contents">
         
-            <transition 
-            appear 
-            @before-enter="beforeEnter" 
-            @enter="enter" 
-            :css="false"> 
-                <img width=450 height=700 :id="`image`" :src="STORAGE_URL + movieCd + '.jpg'" @load="onImgLoad" >
-            </transition>
+            <div class="pixel"> 
+                <img :src="STORAGE_URL + movieCd + '.jpg'" >
+                <img  :src="STORAGE_URL + movieCd + '.jpg'"  >
+            </div>
+    
+            
         </v-flex>
-
+    
     </v-layout>
 </v-container>
 
@@ -29,7 +28,6 @@
 <script>
 import secret from '@/assets/secret.json'
 import gsap from 'gsap'
-
 export default {
     data() {
         return {
@@ -44,11 +42,7 @@ export default {
         }
     },
     mounted(){
-        
-        this.ctx = this.canvas.getContext('2d')
 
-        
-        window.onload = this.firstDraw();
 
     },
     methods:{
@@ -70,26 +64,7 @@ export default {
             })
 
         },
-        firstDraw(){
-            var initialImageURL = this.STORAGE_URL + this.movieCd + '.jpg'
-            this.draw(initialImageURL); 
-        },
-        draw (imgURL) { 
-            this.img.crossOrigin="anonymous"; 
-            this.img.src = imgURL; 
-            let self = this;
-            this.img.onload = function() { 
-                self.canvas.height = self.img.height/4; 
-                self.canvas.width = self.img.width/4; 
-                self.ctx.drawImage(self.img, 0, 0, self.canvas.width, self.canvas.height); 
-                self.pixelate(); 
-                }; 
-        },
-        pixelate() { 
-            this.canvas.height = this.img.height; 
-            this.canvas.width = this.img.width;
-        },
-
+    
 
 
 
@@ -103,6 +78,25 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
-
+.pixel {
+    position: relative;
+    background: #000;
+}
+.pixel img {
+    position: absolute;
+    width: 400px;
+    height: auto;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+.pixel img:last-child {
+    transition: 1s;
+    transform: scale(1);
+}
+.pixel:hover img:last-child {
+    opacity: 0;
+}
 </style>

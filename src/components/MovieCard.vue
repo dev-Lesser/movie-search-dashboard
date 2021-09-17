@@ -29,10 +29,11 @@
                 </router-link>
                 
                 <figcaption>
-                    <v-card-title> {{slide.movieNm}} 
-                        [<v-icon light :color="getRankIcon(slide.rankInten)[0]">
+                    <v-card-title style="display:block;"> 
+                        {{slide.movieNm}} 
+                        [
+                        <v-icon light :color="getRankIcon(slide.rankInten)[0]">
                             {{getRankIcon(slide.rankInten)[1]}}
-                            
                         </v-icon>
                         {{getRankIcon(slide.rankInten)[2]}}
                         ]

@@ -6254,6 +6254,11 @@ pinkie@^2.0.0:
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
+pixelate@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/pixelate/-/pixelate-0.0.5.tgz#80ce9605c5a21d41f6fcb1f1ca4d283039582381"
+  integrity sha1-gM6WBcWiHUH2/LHxyk0oMDlYI4E=
+
 pkg-dir@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-1.0.0.tgz#7a4b508a8d5bb2d629d447056ff4e9c9314cf3d4"
